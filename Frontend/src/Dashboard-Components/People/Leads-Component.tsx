@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { AddButton } from "../MyDay-Component";
+import "../../Stylesheets/Dashboard.css";
+import { array } from "prop-types";
 
-function LeadsInfo() {
+const useArrayofLeads = () => {
   const [arrayOfLeads, setArrayofLeads] = useState([{ name: "david", id: 1 }]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -19,14 +21,37 @@ function LeadsInfo() {
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, []);
+  return { arrayOfLeads, error, loading };
+};
 
-  if (error) return <p>A Network error was encountered</p>;
+function LeadsInfo() {
+  const { arrayOfLeads, error, loading } = useArrayofLeads();
 
-  if (loading) return <p>Loading...</p>;
-
+  if (error) {
+    return (
+      <div className="Dashboard-Componenet">
+        <div className="Title-Dash-Board-Component">
+          People <AddButton />
+        </div>
+        <div>New Leads </div>
+        <p>A Network error was encountered</p>
+      </div>
+    );
+  }
+  if (loading) {
+    return (
+      <div className="Dashboard-Componenet">
+        <div className="Title-Dash-Board-Component">
+          People <AddButton />
+        </div>
+        <div>New Leads </div>
+        <div>Loading...</div>;
+      </div>
+    );
+  }
   return (
-    <div>
-      <div>
+    <div className="Dashboard-Componenet">
+      <div className="Title-Dash-Board-Component">
         People <AddButton />
       </div>
       <div>New Leads </div>
@@ -35,8 +60,8 @@ function LeadsInfo() {
           <li key={lead.id}>{lead.name}</li>
         ))}
       </ul>
+      ;
     </div>
   );
 }
-
 export default LeadsInfo;
