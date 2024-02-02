@@ -23,4 +23,4 @@ function AddButton(): JSX.Element {
   return <Icon sx={{ color: red[500] }}>add_circle</Icon>;
 }
 
-export default MyDay;
+export { MyDay, AddButton };

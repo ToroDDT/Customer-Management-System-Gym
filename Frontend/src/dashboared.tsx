@@ -1,6 +1,6 @@
 import AttentionNeeded from "./Dashboard-Components/Attention-Needed";
 import { MyDay } from "./Dashboard-Components/MyDay-Component";
-import LeadsInfo from "./Dashboard-Components/People/leads-Component";
+import LeadsInfo from "./Dashboard-Components/People/Leads-Component";
 
 function DashBoard() {
   return (

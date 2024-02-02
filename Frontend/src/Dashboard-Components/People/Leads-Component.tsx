@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { AddButton } from "../MyDay-Component";
 import "../../Stylesheets/Dashboard.css";
-import { array } from "prop-types";
 
 const useArrayofLeads = () => {
   const [arrayOfLeads, setArrayofLeads] = useState([{ name: "david", id: 1 }]);
