@@ -19,6 +19,14 @@ function MyDay(): JSX.Element {
   );
 }
 
+function Calendar() {
+  return <div></div>;
+}
+
+function GoogleCalendar() {
+  return <div></div>;
+}
+
 function AddButton(): JSX.Element {
   return <Icon sx={{ color: red[500] }}>add_circle</Icon>;
 }
