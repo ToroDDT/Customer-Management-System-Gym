@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const connection = mongoose.connect(process.env.DB_CONNECTION);
 
 const schema = new mongoose.Schema({
   Email: String,
@@ -12,6 +13,6 @@ const schema = new mongoose.Schema({
   Notes: String,
 });
 
-const PotentialMember = mongoose.model("lead", schema);
+const PotentialMember = connection.model("lead", schema);
 
 module.exports = PotentialMember;
