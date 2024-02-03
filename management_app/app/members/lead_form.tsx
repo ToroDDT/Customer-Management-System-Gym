@@ -5,7 +5,7 @@ const useArrayofLeads = () => {
   const [arrayOfLeads, setArrayofLeads] = useState([{ name: "david", id: 1 }]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const url = "Localhost:4000/leads-records";
+  const url = "Localhost:4000/leads/records";
   useEffect(() => {
     fetch(url, { mode: "cors" })
       .then((response) => {
