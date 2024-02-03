@@ -14,4 +14,10 @@ const newLead = asyncHandler(async (req, res, next) => {
   });
   await newLead.save();
 });
-module.exports = { newLead };
+
+const findAllLeads = asyncHandler(async (req, res, next) => {
+  const ListOfLeads = await PotentialMember.find({});
+  res.json(ListOfLeads);
+});
+
+module.exports = { newLead, findAllLeads };
