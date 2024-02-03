@@ -6,8 +6,6 @@ const leadsController = require("../controllers/leadsController");
 
 router.post("/", leadsController.newLead);
 
-router.get("/create", (req, res) => {
-  res.send("working");
-});
+router.get("/records", leadsController.findAllLeads);
 
 module.exports = router;
