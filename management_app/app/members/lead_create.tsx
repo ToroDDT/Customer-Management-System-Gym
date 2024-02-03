@@ -6,18 +6,18 @@ function LeadsForm() {
         <div>Lead Information</div>
       </div>
       <form action="">
-        <label htmlFor="email">Status</label>
-        <input name="email" type="text" />
-        <label htmlFor="firsName">First Name</label>
-        <input name="firstname" type="text" />
-        <label htmlFor="lastName">Last Name</label>
-        <input type="text" name="lastName" />
-        <label htmlFor="birthday"></label>
-        <input name="birthday" type="text" />
-        <label htmlFor="postalcode"></label>
-        <label htmlFor="Mobile-Phone"></label>
-        <input type="text" />
-        <label htmlFor="objectives"></label>
+        <label htmlFor="Email">Status</label>
+        <input name="Email" type="text" />
+        <label htmlFor="First_Name">First Name</label>
+        <input name="First_Name" type="text" />
+        <label htmlFor="Last_Name">Last Name</label>
+        <input type="text" name="Last_Name" />
+        <label htmlFor="Birthday"></label>
+        <input name="Birthday" type="text" />
+        <label htmlFor="PostalCode"></label>
+        <input type="text" name="PostalCode" />
+        <label htmlFor="Mobile_Phone"></label>
+        <input type="text" name="Mobile_Phone" />
         <label htmlFor="objectives"></label>
         <select>
           <option value="weight-loss"> Weight Loss</option>
