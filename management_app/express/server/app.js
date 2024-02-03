@@ -41,6 +41,6 @@ app.use(function (err, req, res, next) {
 });
 
 //custom error handler
-app, use(errorHandler);
+app.use(errorHandler);
 
 module.exports = app;
