@@ -18,8 +18,8 @@ function LeadsForm() {
         <input type="text" name="PostalCode" />
         <label htmlFor="Mobile_Phone"></label>
         <input type="text" name="Mobile_Phone" />
-        <label htmlFor="objectives"></label>
-        <select>
+        <label htmlFor="Objectives"></label>
+        <select name="Objectives" id="Objectives">
           <option value="weight-loss"> Weight Loss</option>
           <option value="Athletic Performance"></option>
           <option value="Health Reasons"></option>
