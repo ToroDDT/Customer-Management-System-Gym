@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { AddButton } from "../dashboard/MyDay-Component";
 
