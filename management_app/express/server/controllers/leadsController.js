@@ -20,4 +20,9 @@ const findAllLeads = asyncHandler(async (req, res, next) => {
   res.json(ListOfLeads);
 });
 
+const updateLeadInfo = asyncHandler(async (req, res, next) => {
+  const leadFirstName = req.body.FirstName;
+  const lead = await PotentialMember.findOne({ FirstName: leadFirstName });
+});
+
 module.exports = { newLead, findAllLeads };
