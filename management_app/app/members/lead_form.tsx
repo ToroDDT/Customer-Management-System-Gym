@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { AddButton } from "../dashboard/MyDay-Component";
 
 const useArrayofLeads = () => {
   const [arrayOfLeads, setArrayofLeads] = useState([{ name: "david", id: 1 }]);
@@ -26,10 +25,7 @@ function LeadsInfo() {
 
   if (error) {
     return (
-      <div className="Dashboard-Componenet">
-        <div className="Title-Dash-Board-Component">
-          People <AddButton />
-        </div>
+      <div className="mx-2 text-zinc-400">
         <div>New Leads </div>
         <p>A Network error was encountered</p>
       </div>
@@ -37,20 +33,14 @@ function LeadsInfo() {
   }
   if (loading) {
     return (
-      <div className="Dashboard-Componenet">
-        <div className="Title-Dash-Board-Component">
-          People <AddButton />
-        </div>
+      <div className="mx-2 text-zinc-400">
         <div>New Leads </div>
         <div>Loading...</div>;
       </div>
     );
   }
   return (
-    <div>
-      <div>
-        People <AddButton />
-      </div>
+    <div className="mx-2">
       <div>New Leads </div>
       <ul>
         {arrayOfLeads.map((lead) => (
