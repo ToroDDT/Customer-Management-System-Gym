@@ -1,9 +1,19 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 
+interface LeadInformation {
+  id: Number;
+  name: String;
+  dateAssigned: String;
+  assignedTo: String;
+  Photo: String;
+}
+
 const useArrayofLeads = () => {
-  const [arrayOfLeads, setArrayofLeads] = useState([{ name: "Dvid", id: 1 }]);
-  const [error, setError] = useState(null);
+  const [arrayOfLeads, setArrayofLeads] = useState<LeadInformation>([
+    { name: "Dvid", id: 1 },
+  ]);
+  const [error, setError] = useState<null | boolean>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const url = "http://localhost:8080/user";
   useEffect(() => {
