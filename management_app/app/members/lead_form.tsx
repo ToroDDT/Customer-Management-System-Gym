@@ -2,16 +2,22 @@
 import { useEffect, useMemo, useState } from "react";
 
 interface LeadInformation {
-  id: Number;
-  name: String;
-  dateAssigned: String;
-  assignedTo: String;
-  Photo: String;
+  id: number;
+  name: string;
+  dateAssigned: string;
+  assignedTo: string;
+  Photo: string;
 }
 
 const useArrayofLeads = () => {
-  const [arrayOfLeads, setArrayofLeads] = useState<LeadInformation>([
-    { name: "Dvid", id: 1 },
+  const [arrayOfLeads, setArrayofLeads] = useState<LeadInformation[]>([
+    {
+      id: 1,
+      name: "david",
+      dateAssigned: "January, 10",
+      assignedTo: "unassigned",
+      Photo: "stockPic",
+    },
   ]);
   const [error, setError] = useState<null | boolean>(null);
   const [loading, setLoading] = useState<boolean>(true);
