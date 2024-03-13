@@ -1,20 +1,27 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const useArrayofLeads = () => {
-  const [arrayOfLeads, setArrayofLeads] = useState([{ name: "david", id: 1 }]);
+  const [arrayOfLeads, setArrayofLeads] = useState([{ name: "Dvid", id: 1 }]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const url = "Localhost:4000/leads/records";
+  const url = "http://localhost:8080/user";
   useEffect(() => {
-    fetch(url, { mode: "cors" })
+    fetch(url, {
+      method: "get",
+      headers: new Headers({
+        Authorization: "Basic " + btoa("namhm:codejava"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      }),
+    })
       .then((response) => {
         if (response.status >= 400) {
           throw new Error("server error");
         }
         return response.json();
       })
-      .then((response) => setArrayofLeads(response[0]))
+      .then((data) => setArrayofLeads([data]))
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, []);
