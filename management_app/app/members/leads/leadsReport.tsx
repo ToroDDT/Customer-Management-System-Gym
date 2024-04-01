@@ -2,16 +2,20 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 
 function LeadsTable() {
+  const [selectedAmount, setSelectedAmount] = useState("10");
   const { leadsInfo, error, loading } = useLeadsInfo(entries, search);
   return (
     <div>
       <div>
         <span>
-          <select>
+          <select
+            value={selectedAmount}
+            onChange={(e) => setSelectedAmount(e.target.value)}
+          >
             <option value="10">10</option>
-            <option>25</option>
-            <option>50</option>
-            <option>100</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
           </select>
         </span>
         <div>ContentEditable</div>
