@@ -1,8 +1,17 @@
 "use client";
 import Button from "@mui/material/Button";
 import { useState } from "react";
-function submitAccountInfo() {
-  fetch;
+
+function submitAccountInfo(userName: string, email: string, password: string) {
+  const formData = new FormData();
+  formData.append("username", userName);
+  formData.append("email", email);
+  formData.append("password", password);
+  fetch("http:localhost:8080/create/account", {
+    body: formData,
+    method: "post",
+  });
+  console.log("form submited");
 }
 
 function validateFields(
@@ -20,6 +29,8 @@ function validateFields(
   const checkUserNameLength = () => {
     if (userName.length == 0) {
       return false;
+    } else {
+      return true;
     }
   };
   return { checkPassword, checkUserNameLength };
@@ -39,7 +50,9 @@ function Page() {
   const formSubmit = (event) => {
     event.preventDefault();
     setSubmit(true);
-    alert("hi");
+    if (checkPassword() == false && checkUserNameLength() == true) {
+      submitAccountInfo(userName, email, password);
+    }
   };
   return (
     <>
@@ -60,33 +73,44 @@ function Page() {
             onChange={(e) => setUserName(e.target.value)}
           />
         </label>
-        <label htmlFor="email">
-          <input
-            className="pr-52 pt-3 pb-3 bg-slate-200 rounded-lg mb-3 pl-3"
-            type="text"
-            placeholder="Email"
-            value={email}
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            className="pr-52 pt-3 pb-3 bg-slate-200 rounded-lg mb-3 pl-3"
-            type="text"
-            placeholder="password"
-            pattern=".{8,}"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
+        <div>
+          <label htmlFor="email">
+            <input
+              className="pr-52 pt-3 pb-3 bg-slate-200 rounded-lg pl-3"
+              type="text"
+              placeholder="Email"
+              value={email}
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <div className="mb-2 text-xs pl-1">
+            Email must be in this format(for example: john@yahoo.com)
+          </div>
+        </div>
+        <div>
+          <label htmlFor="password">
+            <input
+              className="pr-52 pt-3 pb-3 bg-slate-200 rounded-lg pl-3"
+              type="text"
+              placeholder="Password"
+              pattern=".{8,}"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+
+          <div className="mb-2 text-xs pl-1">
+            Password must be 8 characters long
+          </div>
+        </div>
         <div>
           <label htmlFor="confirm-password">
             <input
               className="pr-52 pt-3 pb-3 pl-3 bg-slate-200 rounded-lg"
               type="text"
-              placeholder="confirm password"
+              placeholder="Confirm password"
               value={confirmPassword}
               required
               onChange={(e) => setConfirmPassword(e.target.value)}
