@@ -7,10 +7,10 @@ import {
   KeyIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 function Page() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-
   return (
     <>
       <div className="flex">
@@ -61,7 +61,9 @@ function Page() {
             className="bg-white text-black font-extrabold mt-6 px-10 py-3 rounded-3xl"
             variant="contained"
           >
-            Sign Up
+            <Link onClick={(e) => e.stopPropagation()} href="/signup">
+              Sign Up
+            </Link>
           </Button>
         </div>
       </div>
