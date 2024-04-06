@@ -1,9 +1,12 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import sanitizeHtml from "sanitize-html";
+import ContentEditable from "react-contenteditable";
 
 function LeadsTable() {
   const [selectedAmount, setSelectedAmount] = useState("10");
-  const { leadsInfo, error, loading } = useLeadsInfo(entries, search);
+  const [content, setContent] = useState("");
+  const { leadsInfo, error, loading } = useLeadsInfo(selectedAmount, content);
   return (
     <div>
       <div>
@@ -18,8 +21,11 @@ function LeadsTable() {
             <option value="100">100</option>
           </select>
         </span>
-        <div>ContentEditable</div>
+        <div>
+          <SearchEditable setText={setContent} />
+        </div>
       </div>
+      <DataTable rows={leadsInfo} />
     </div>
   );
 }
@@ -52,7 +58,7 @@ const useLeadsInfo = (a, b) => {
         Accept: "application/json",
       }),
     };
-    fetch(url, httpHeaders)
+    fetch(url + new URLSearchParams({}), httpHeaders)
       .then((response) => {
         if (response.status >= 400) {
           throw new Error("server error");
@@ -63,12 +69,11 @@ const useLeadsInfo = (a, b) => {
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, [entries, search]);
+
   return { leadsInfo, error, loading };
 };
 
-function DataTable() {
-  const [rows, setRows] = useState([]);
-
+function DataTable({ rows }) {
   return (
     <DataGrid
       rows={rows}
@@ -80,6 +85,28 @@ function DataTable() {
       }}
       pageSizeOptions={[5, 10]}
       checkboxSelection
+    />
+  );
+}
+
+function SearchEditable({ setText }) {
+  const [content, setContent] = useState("");
+  const onContentChange = useCallback((evt) => {
+    const sanitizeConf = {
+      allowedTags: [],
+      allowedAttributes: { a: ["href"] },
+    };
+
+    setContent(sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf));
+  }, []);
+  return (
+    <ContentEditable
+      onChange={() => {
+        onContentChange;
+        setText(content);
+      }}
+      onBlur={onContentChange}
+      html={content}
     />
   );
 }

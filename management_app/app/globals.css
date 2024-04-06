@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: rgb(224, 224, 224);
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
