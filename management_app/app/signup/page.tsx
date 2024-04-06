@@ -4,46 +4,6 @@ import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
 import Link from "next/link";
 
-const useSubmitFormData = (
-  userName: string,
-  email: string,
-  password: string,
-  submit: boolean
-) => {
-  const [error, setError] = useState("");
-  const [submitForm, setSubmitForm] = useState(false);
-  setSubmitForm(submit);
-  useEffect(() => {
-    if (submitForm) {
-      const formData = new FormData();
-      formData.append("username", userName);
-      formData.append("email", email);
-      formData.append("password", password);
-      fetch("http:localhost:8080/create/account", {
-        body: formData,
-        method: "post",
-      })
-        .then((response) => {
-          if (response.status >= 400) {
-            throw new Error("server error");
-          }
-          return response.json();
-        })
-        .catch((error) => setError(error))
-        .finally(() => {
-          if (error == "") {
-            return redirect("/login");
-          }
-        });
-    } else {
-      return;
-    }
-  }, [error, submitForm, email, password, userName]);
-
-  console.log("form submited");
-  return { error };
-};
-
 function validateFields(
   password: string,
   confirmPassword: string,
@@ -72,7 +32,8 @@ function Page() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [submit, setSubmit] = useState(false);
-  const { error } = useSubmitFormData(userName, email, password, submit);
+  const [error, setError] = useState("");
+  const [submitForm, setSubmitForm] = useState(false);
   const { checkPassword, checkUserNameLength } = validateFields(
     password,
     confirmPassword,
@@ -84,6 +45,31 @@ function Page() {
       setSubmit(true);
     }
   };
+  useEffect(() => {
+    if (submit) {
+      console.log("Form Submited");
+      const formData = new FormData();
+      formData.append("username", userName);
+      formData.append("email", email);
+      formData.append("password", password);
+      fetch("http:localhost:8080/create/account", {
+        body: formData,
+        method: "post",
+      })
+        .then((response) => {
+          if (response.status >= 400) {
+            throw new Error("server error");
+          }
+          return response.json();
+        })
+        .catch((error) => setError(error))
+        .finally(() => {
+          if (error == "") {
+            return redirect("/login");
+          }
+        });
+    }
+  }, [userName, email, password, error, submit]);
   return (
     <>
       <form
