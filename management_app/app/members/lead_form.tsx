@@ -21,16 +21,18 @@ const useArrayofLeads = () => {
   ]);
   const [error, setError] = useState<null | boolean>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const url = "http://localhost:8080/user";
+  const url: string = "http://localhost:8080/user";
+
   useEffect(() => {
-    fetch(url, {
+    let httpHeaders: RequestInit = {
       method: "get",
       headers: new Headers({
         Authorization: "Basic " + btoa("namhm:codejava"),
         "Content-Type": "application/json",
         Accept: "application/json",
       }),
-    })
+    };
+    fetch(url, httpHeaders)
       .then((response) => {
         if (response.status >= 400) {
           throw new Error("server error");
@@ -43,7 +45,7 @@ const useArrayofLeads = () => {
   }, []);
   return { arrayOfLeads, error, loading };
 };
-function LeadsInfo() {
+function LeadsInfo(): JSX.Element {
   const { arrayOfLeads, error, loading } = useArrayofLeads();
 
   if (error) {
