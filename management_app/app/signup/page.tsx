@@ -1,18 +1,48 @@
 "use client";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { redirect } from "react-router-dom";
+import Link from "next/link";
 
-function submitAccountInfo(userName: string, email: string, password: string) {
-  const formData = new FormData();
-  formData.append("username", userName);
-  formData.append("email", email);
-  formData.append("password", password);
-  fetch("http:localhost:8080/create/account", {
-    body: formData,
-    method: "post",
-  });
+const useSubmitFormData = (
+  userName: string,
+  email: string,
+  password: string,
+  submit: boolean
+) => {
+  const [error, setError] = useState("");
+  const [submitForm, setSubmitForm] = useState(false);
+  setSubmitForm(submit);
+  useEffect(() => {
+    if (submitForm) {
+      const formData = new FormData();
+      formData.append("username", userName);
+      formData.append("email", email);
+      formData.append("password", password);
+      fetch("http:localhost:8080/create/account", {
+        body: formData,
+        method: "post",
+      })
+        .then((response) => {
+          if (response.status >= 400) {
+            throw new Error("server error");
+          }
+          return response.json();
+        })
+        .catch((error) => setError(error))
+        .finally(() => {
+          if (error == "") {
+            return redirect("/login");
+          }
+        });
+    } else {
+      return;
+    }
+  }, [error, submitForm, email, password, userName]);
+
   console.log("form submited");
-}
+  return { error };
+};
 
 function validateFields(
   password: string,
@@ -42,6 +72,7 @@ function Page() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [submit, setSubmit] = useState(false);
+  const { error } = useSubmitFormData(userName, email, password, submit);
   const { checkPassword, checkUserNameLength } = validateFields(
     password,
     confirmPassword,
@@ -49,16 +80,14 @@ function Page() {
   );
   const formSubmit = (event) => {
     event.preventDefault();
-    setSubmit(true);
     if (checkPassword() == false && checkUserNameLength() == true) {
-      submitAccountInfo(userName, email, password);
+      setSubmit(true);
     }
   };
   return (
     <>
       <form
         className="flex flex-col mt-40 box-border pr-7 pl-7 pb-32 bg-white rounded-lg mr-10 items-center"
-        action=""
         onSubmit={formSubmit}
         method="post"
       >
@@ -136,7 +165,7 @@ function Page() {
             variant="contained"
             className="bg-slate-200 text-black rounded-lg p-3 pr-20 pl-20 font-extrabold"
           >
-            Sign IN
+            <Link href="/login">Login</Link>
           </Button>
         </div>
       </form>
