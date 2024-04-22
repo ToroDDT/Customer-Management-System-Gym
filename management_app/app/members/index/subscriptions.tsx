@@ -9,13 +9,15 @@ interface Props {
   address: string;
 }
 
-export default function MemberMenuOptions() {
+export default function MemberMenuOptions(records) {
   return (
     <div className="flex mx-44 bg-white p-6">
       <Subscriptions />
       <div>
-        <div className="bg-slate-200">Members</div>
-        <div>
+        <div className="flex justify-center bg-slate-200 py-5 text-2xl">
+          Members
+        </div>
+        <div className="flex justify-center bg-slate-200 mt-2 p-2">
           Manage all aspects of your member recorder here!! Click on a member to
           view or edit thier personal plans, information, billing, or
           information
@@ -65,11 +67,11 @@ function Subscriptions() {
   return (
     <div className="">
       <div>Active</div>
-      <div className=" flex space-x-44  bg-blue-500 ">
+      <div className=" flex space-x-40 text-white bg-blue-500 mr-4 p-1 text-sm ">
         <div>name</div>
         <div>Plan</div>
-        <div>Pre/Next</div>
-        <div>Bill</div>
+        <div>last-billing</div>
+        <div>Next-billing</div>
         <div>Status</div>
       </div>
       <ul></ul>
@@ -79,10 +81,12 @@ function Subscriptions() {
 
 function MemberButtonOptions(props: Props) {
   return (
-    <Link href={props.link}>
-      {props.buttonName}{" "}
-      <Counter counter={props.hasCounter} address={props.address} />
-    </Link>
+    <div className=" flex py-3 justify-center text-blue-800 border-b-2 border-slate-300 hover:bg-sky-100">
+      <Link href={props.link}>
+        {props.buttonName}
+        <Counter counter={props.hasCounter} address={props.address} />
+      </Link>
+    </div>
   );
 }
 

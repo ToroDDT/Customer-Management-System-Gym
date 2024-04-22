@@ -6,3 +6,4 @@ export default async function fetchActiveSubsAmount() {
   let amount: Subscriptions = await amountSubs.json();
   return amount;
 }
+
