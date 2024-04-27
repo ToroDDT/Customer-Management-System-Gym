@@ -97,6 +97,19 @@ function Page() {
       id: 0,
     });
   }
+  useEffect(() => {
+    let draggableEl = document.getElementById("draggable-el")!;
+    const draggable = new Draggable(draggableEl, {
+      itemSelector: ".fc-event",
+      eventData: function (eventEl) {
+        let title = eventEl.getAttribute("title");
+        let id = eventEl.getAttribute("data");
+        let start = eventEl.getAttribute("start");
+        return { title, id, start };
+      },
+    });
+    return () => draggable.destroy();
+  }, []);
 
   return (
     <>
