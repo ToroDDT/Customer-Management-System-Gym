@@ -1,6 +1,11 @@
+import { TextField } from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import SelectInput from "@mui/material/Select/SelectInput";
+import Textarea from "@mui/joy/Textarea";
+
 function LeadsForm() {
   return (
-    <div className="m-10">
+    <div className="m-10 bg-white p-5">
       <div>
         <div>
           <span>Home /</span>
@@ -10,54 +15,53 @@ function LeadsForm() {
         <div>Create New Lead</div>
         <div>Lead Information</div>
       </div>
-      <form className="flex" action="">
-        <div className="flex-col space-y-3">
+      <form className="flex flex-col" action="">
+        <div className="space-y-3">
           <div>
-            <label htmlFor="Email">Status</label>
+            <label>Status</label>
           </div>
-          <div>
-            <label htmlFor="First_Name">First Name</label>
+          <div className="flex gap-x-9">
+            <TextField id="FirstName" variant="outlined" label="FirstName" />
           </div>
-          <div>
-            <label htmlFor="Last_Name">Last Name</label>
+          <div className="flex gap-x-9">
+            <TextField id="LastName" variant="outlined" label="LastName" />
           </div>
-          <div>
-            <label htmlFor="Birthday">Birthday</label>
+          <div className="flex gap-x-12">
+            <TextField id="Birthday" variant="outlined" label="Birthday" />
           </div>
-          <div>
-            <label htmlFor="PostalCode">Postal-code</label>
+          <div className="flex gap-x-7">
+            <TextField id="PostalCode" variant="outlined" label="PostalCode" />
           </div>
-          <div>
-            <label htmlFor="Mobile_Phone">Mobile-Phone</label>
+          <div className="flex gap-x-3">
+            <TextField
+              id="MobilePhoneNumber"
+              variant="outlined"
+              label="MobilePhoneNumber"
+            />
           </div>
-          <div>
-            <label htmlFor="Objectives"></label>
-            <select name="Objectives" id="Objectives">
+          <div className="flex gap-x-10">
+            <Select
+              defaultValue="Objectives"
+              placeholder="Objectives"
+              sx={{ width: 248 }}
+            >
               <option value="weight-loss"> Weight Loss</option>
               <option value="Athletic Performance">Athletic Peformance</option>
               <option value="Health Reasons"> Health Reasons</option>
               <option value="Other">Other</option>
-            </select>
+            </Select>
           </div>
           <div>
             <label htmlFor="Referred-by">Referred By</label>
             <select name="Referred-by" id="Referred-by">
-              <option value="google">google</option>
-              <option value=""></option>
+              <option value="Google">Google</option>
+              <option value="Friend"> Friend</option>
+              <option value="Website">Website</option>
             </select>
           </div>
-          <div>
-            <label htmlFor="Notes"></label>
-            <textarea name="Notes" id="Notes" cols="30" rows="10"></textarea>
+          <div className="flex gap-x-11">
+            <Textarea name="Outlined" placeholder="Notes" variant="outlined" />
           </div>
-        </div>
-        <div className="flex-col space-y-3">
-          <input name="Email" type="text" className="block" />
-          <input name="First_Name" type="text" className="block" />
-          <input type="text" name="Last_Name" className="block" />
-          <input name="Birthday" type="text" className="block" />
-          <input type="text" name="PostalCode" className="block" />
-          <input type="text" name="Mobile_Phone" className="block" />
         </div>
       </form>
     </div>
