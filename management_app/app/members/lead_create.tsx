@@ -1,24 +1,32 @@
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import SelectInput from "@mui/material/Select/SelectInput";
 import Textarea from "@mui/joy/Textarea";
+import Link from "next/link";
 
 function LeadsForm() {
   return (
     <div className="m-10 bg-white p-5">
       <div>
-        <div>
+        <div className="bg-slate-100 p-1 mb-3">
           <span>Home /</span>
           <span> Leads /</span>
-          <span> Create New lead</span>
+          <span className=""> Create New lead</span>
         </div>
-        <div>Create New Lead</div>
-        <div>Lead Information</div>
+        <div className="text-2xl text-slate-500 mb-1">Create New Lead</div>
+        <div className="text-xl border-solid border-0 border-b border-black mb-4">
+          Lead Information
+        </div>
       </div>
       <form className="flex flex-col" action="">
         <div className="space-y-3">
           <div>
-            <label>Status</label>
+            <Select sx={{ width: 248 }}>
+              <option value="Converted">Converted</option>
+              <option value="Contacted">Contacted</option>
+              <option value="Disqualified"> Disqualified</option>
+              <option value="In-Discussion">In Discussion</option>
+            </Select>
           </div>
           <div className="flex gap-x-9">
             <TextField id="FirstName" variant="outlined" label="FirstName" />
@@ -60,7 +68,12 @@ function LeadsForm() {
             </Select>
           </div>
           <div className="flex gap-x-11">
-            <Textarea name="Outlined" placeholder="Notes" variant="outlined" />
+            <Textarea
+              sx={{ width: 300 }}
+              name="Outlined"
+              placeholder="Notes"
+              variant="outlined"
+            />
           </div>
         </div>
       </form>
