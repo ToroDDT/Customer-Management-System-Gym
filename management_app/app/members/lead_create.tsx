@@ -52,12 +52,12 @@ function LeadsForm() {
             </Select>
           </div>
           <div>
-            <label htmlFor="Referred-by">Referred By</label>
-            <select name="Referred-by" id="Referred-by">
-              <option value="Google">Google</option>
-              <option value="Friend"> Friend</option>
-              <option value="Website">Website</option>
-            </select>
+            <Select sx={{ width: 248 }}>
+              <option value="Website"> Website</option>
+              <option value="Forum">Athletic Peformance</option>
+              <option value="Friends"> Health Reasons</option>
+              <option value="Other">Other</option>
+            </Select>
           </div>
           <div className="flex gap-x-11">
             <Textarea name="Outlined" placeholder="Notes" variant="outlined" />
