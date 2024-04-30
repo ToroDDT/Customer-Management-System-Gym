@@ -1,10 +1,31 @@
+"use client";
 import { Button, TextField } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import SelectInput from "@mui/material/Select/SelectInput";
+//import SelectInput from "@mui/material/Select/SelectInput";
 import Textarea from "@mui/joy/Textarea";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Box,
+  SelectChangeEvent,
+} from "@mui/material";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 function LeadsForm() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [mobilePhoneNumber, setMobilePhoneNumber] = useState("");
+  const [objectives, setObjectives] = useState("");
+  const [referredBy, setReferredBy] = useState("");
+
+  const [openObjectives, setOpenObjectives] = useState(false);
+  const [openReferredBy, setOpenReferredBy] = useState(false);
+  const [openStatus, setOpenStatus] = useState(false);
+
   return (
     <div className="flex m-10 bg-white p-5">
       <div className="mr-8">
@@ -28,27 +49,56 @@ function LeadsForm() {
         <form className="" action="">
           <div className="space-y-3 ">
             <div>
-              <Select sx={{ width: 248 }}>
-                <option value="Converted">Converted</option>
-                <option value="Contacted">Contacted</option>
-                <option value="Disqualified"> Disqualified</option>
-                <option value="In-Discussion">In Discussion</option>
-              </Select>
+              <BasicSelect
+                id={"Status"}
+                optionOne={"Contacted"}
+                optionTwo={"In Discussion"}
+                optionThree={"Disqualified"}
+                optionFour={"Attempted"}
+              />
             </div>
             <div className="flex gap-x-9">
-              <TextField id="FirstName" variant="outlined" label="FirstName" />
+              <TextField
+                id="FirstName"
+                variant="outlined"
+                label="FirstName"
+                value={firstName}
+                onChange={(event) => {
+                  setFirstName(event.target.value);
+                }}
+              />
             </div>
             <div className="flex gap-x-9">
-              <TextField id="LastName" variant="outlined" label="LastName" />
+              <TextField
+                id="LastName"
+                variant="outlined"
+                label="LastName"
+                value={lastName}
+                onChange={(event) => {
+                  setLastName(event.target.value);
+                }}
+              />
             </div>
             <div className="flex gap-x-12">
-              <TextField id="Birthday" variant="outlined" label="Birthday" />
+              <TextField
+                id="Birthday"
+                variant="outlined"
+                label="Birthday"
+                value={birthday}
+                onChange={(event) => {
+                  setBirthday(event.target.value);
+                }}
+              />
             </div>
             <div className="flex gap-x-7">
               <TextField
                 id="PostalCode"
                 variant="outlined"
                 label="PostalCode"
+                value={postalCode}
+                onChange={(event) => {
+                  setPostalCode(event.target.value);
+                }}
               />
             </div>
             <div className="flex gap-x-3">
@@ -56,29 +106,30 @@ function LeadsForm() {
                 id="MobilePhoneNumber"
                 variant="outlined"
                 label="MobilePhoneNumber"
+                value={mobilePhoneNumber}
+                onChange={(event) => {
+                  setMobilePhoneNumber(event.target.value);
+                }}
               />
             </div>
             <div className="flex gap-x-10">
-              <Select
-                defaultValue="Objectives"
-                placeholder="Objectives"
-                sx={{ width: 248 }}
-              >
-                <option value="weight-loss"> Weight Loss</option>
-                <option value="Athletic Performance">
-                  Athletic Peformance
-                </option>
-                <option value="Health Reasons"> Health Reasons</option>
-                <option value="Other">Other</option>
-              </Select>
+              <BasicSelect
+                id={"Objectives"}
+                setState={setObjectives}
+                optionOne={"Weight loss"}
+                optionTwo={"Health Reasons"}
+                optionThree={"Athletic Performance"}
+                optionFour={"Other"}
+              />
             </div>
             <div>
-              <Select sx={{ width: 248 }}>
-                <option value="Website"> Website</option>
-                <option value="Forum">Athletic Peformance</option>
-                <option value="Friends"> Health Reasons</option>
-                <option value="Other">Other</option>
-              </Select>
+              <BasicSelect
+                id={"Referred By"}
+                optionOne={"Website"}
+                optionThree={"Forum"}
+                optionTwo={"Friends"}
+                optionFour={"Other"}
+              />
             </div>
             <div className="flex gap-x-11">
               <Textarea
@@ -93,6 +144,33 @@ function LeadsForm() {
       </div>
       <LeadsToolOptions />
     </div>
+  );
+}
+function BasicSelect(props) {
+  const [value, setValue] = useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setValue(event.target.value as string);
+  };
+
+  return (
+    <Box sx={{ width: 248 }}>
+      <FormControl fullWidth>
+        <InputLabel id={props.id}> {props.id} </InputLabel>
+        <Select
+          labelId={props.id}
+          id={props.id}
+          value={value}
+          label={props.id}
+          onChange={handleChange}
+        >
+          <MenuItem value={props.optionOne}>{props.optionOne}</MenuItem>
+          <MenuItem value={props.optionTwo}>{props.optionTwo}</MenuItem>
+          <MenuItem value={props.optionThree}>{props.optionThree}</MenuItem>
+          <MenuItem value={props.optionFour}>{props.optionFour}</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
   );
 }
 
